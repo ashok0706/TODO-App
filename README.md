@@ -1,4 +1,4 @@
-<h1 align = "center"> TODO APPLICATION </h1>
+<h1 align = "center"> RECIPE MANAGEMENT APPLICATION </h1>
 
 <p align="center">
 <a href="Java url">
@@ -16,7 +16,7 @@
 </a>
 </p>
    
-This project is a basic web application that allows Users  manage their daily Todo works. Users can add Todos and marks as complited if it is complited . 
+This project is a basic web application that allows Users  manage their daily  recipes. 
 
 ---
 <br>
@@ -68,22 +68,38 @@ spring.jpa.properties.hibernate.format_sql=true
 The Job data model is defined in the Job class, which has the following attributes:
 <br>
 
-* TODO Model
+ * Recipe
 ```
-   @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+ 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private String recipeId;
+    
+	private String recipeNameString; 
 
-    @NotBlank(message = "Description is required")
-    private String description;
+	private String ingredients;
 
-    private Boolean isComplete;
+	private String instructions;
 
-    private Instant createdAt;
-
-    private Instant updatedAt;
+	private String comment;
+    
+	private String comentingUsernamel;
 ```
+* User
+```
+  @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 
+	private String userId;
+
+	private String firstname;
+
+	private String lastName;
+
+	private String gmail;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Recipe>  recipe;
+```
 <!-- * AppointmentKey Model
 ```
 appId = Long
@@ -146,20 +162,24 @@ List<Appointment> : appointments
 
 The following endpoints are available in the API:
 
-* Mome Controller:
+* Recipe Controller:
 ```
-<!-- POST /doctor/addDoctor:create a new Doctor accout     -->
-GET /Home : Return Home page
+ POST /recipe/add : create a new user`s  accout   with list of recipes  
+ GET /recipe/get : Return List of recipes 
+ GET/recipe/getbyid/{id} : retuen recipe based on id
+ PUT/recipe/update : update reciep details based on recipe Id otherwise creates new recipe
+ DELETE/recipe/delete/{id} : delete recipe based
+
 ```
 
-* Todo Controller
+<!-- * Todo Controller
 ```
 GET /get-todo:returns the all  Todo`s
 POST/creat-todo : add Todo to user Todo list
 PUT/Update-todo : It updates the excisting todo otherwise create new Todo
 GET/get/{id} : get todo by its id;
 
-```
+``` -->
 <!-- * Patient Controller:
 ```
 POST /patient/signup:patient a new Doctor accout    
@@ -179,7 +199,7 @@ We have used Persistent database to implement CRUD Operations.
 
 ## Project Summary
 
-This project is a basic web application that allows Users  manage their daily Todo works. Users can add Todos and marks as complited if it is complited . 
+This project is a basic web application that allows Users  manage their daily Recipe details. Onther can comment on recipe . 
 
 
 
